@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-# Fail on any error
-set -e
+# Remove strict error checking so the server starts even if migration fails
+# This helps us debug via the browser/logs instead of crashing the container
+set +e
+
+echo "--- Entrypoint Starting ---"
 
 # 1. Setup SQLite Database on Persistent Volume
-# We do this FIRST because the application needs the DB to start/migrate
 if [ -d "/data" ]; then
     echo "Configuring /data volume..."
     
@@ -20,17 +22,22 @@ if [ -d "/data" ]; then
     chmod -R 775 /data
 fi
 
-# 2. Clear and Cache Configuration
-echo "Caching configuration..."
+# 2. Clear Configuration (Safer than caching if env vars are missing)
+echo "Clearing configuration..."
 php artisan config:clear
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan route:clear
+php artisan view:clear
 
 # 3. Run Migrations
-# This will create the tables in the empty /data/database.sqlite
 echo "Running migrations..."
 php artisan migrate --force
+
+# Check if migration failed
+if [ $? -ne 0 ]; then
+    echo "ERROR: Migrations failed. Check your APP_KEY and database configuration."
+else
+    echo "Migrations finished successfully."
+fi
 
 # 4. Start Supervisord
 echo "Starting Supervisord..."
