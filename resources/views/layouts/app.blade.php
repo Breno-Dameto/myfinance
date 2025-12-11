@@ -73,8 +73,8 @@
     </div>
 
     <!-- Desktop Sidebar -->
-    <aside class="w-64 bg-dark text-white flex flex-col shadow-2xl z-20 hidden md:flex">
-        <div class="h-16 flex items-center justify-center border-b border-gray-800">
+    <aside class="hidden md:flex w-64 bg-dark text-white flex-col shadow-2xl z-20 h-screen fixed top-0 left-0 overflow-y-auto">
+        <div class="h-16 flex items-center justify-center border-b border-gray-800 shrink-0">
             <h1 class="text-2xl font-bold tracking-wider text-primary">MY<span class="text-white">FINANCE</span></h1>
         </div>
         
@@ -107,10 +107,10 @@
     </aside>
     @endauth
 
-    <!-- Main Content -->
-    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden md:ml-64 transition-all duration-300">
         
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-8">
             @if(session('success'))
                 <div x-data="{ show: true }" x-show="show" class="mb-6 bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm flex justify-between items-center">
                     <div>{{ session('success') }}</div>

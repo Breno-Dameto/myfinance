@@ -123,4 +123,9 @@ class TransactionController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    public function exportXlsx()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\TransactionsExport, 'transacoes_'.date('Ymd').'.xlsx');
+    }
 }

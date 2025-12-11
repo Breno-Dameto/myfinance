@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/transactions/export/csv', [TransactionController::class, 'exportCsv'])->name('transactions.export.csv');
+    Route::get('/transactions/export/xlsx', [TransactionController::class, 'exportXlsx'])->name('transactions.export.xlsx');
 });
 
 // Test Email Route
