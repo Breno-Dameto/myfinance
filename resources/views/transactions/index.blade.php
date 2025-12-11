@@ -48,37 +48,61 @@
 
 <!-- Tabela -->
 <div class="bg-white shadow-lg rounded-lg border border-gray-100 overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse min-w-[600px]"> <!-- min-w ensure horizontal scroll on tiny screens -->
+    <div class="overflow-x-auto hidden md:block"> <!-- Desktop Table -->
+        <table class="w-full text-left border-collapse">
             <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
-            <tr>
-                <th class="p-4 font-medium">Data</th>
-                <th class="p-4 font-medium">Descrição</th>
-                <th class="p-4 font-medium">Categoria</th>
-                <th class="p-4 font-medium text-right">Valor</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-            @forelse($transactions as $t)
-                <tr class="hover:bg-yellow-50 transition duration-150">
-                    <td class="p-4 text-gray-600 text-sm">{{ $t->date->format('d/m/Y') }}</td>
-                    <td class="p-4 font-medium text-gray-800">{{ $t->description }}</td>
-                    <td class="p-4">
-                        <span class="px-2 py-1 text-xs font-bold rounded-full {{ $t->category_id ? 'bg-gray-200 text-gray-700' : 'bg-yellow-100 text-yellow-800' }}">
-                            {{ $t->category_name }}
-                        </span>
-                    </td>
-                    <td class="p-4 text-right font-mono font-medium {{ $t->type == 'income' ? 'text-green-600' : 'text-red-500' }}">
-                        {{ $t->type == 'expense' ? '-' : '+' }} R$ {{ number_format($t->amount, 2, ',', '.') }}
-                    </td>
-                </tr>
-            @empty
                 <tr>
-                    <td colspan="4" class="p-8 text-center text-gray-400 italic">Nenhum lançamento encontrado para este período.</td>
+                    <th class="p-4 font-medium">Data</th>
+                    <th class="p-4 font-medium">Descrição</th>
+                    <th class="p-4 font-medium">Categoria</th>
+                    <th class="p-4 font-medium text-right">Valor</th>
                 </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @forelse($transactions as $t)
+                    <tr class="hover:bg-yellow-50 transition duration-150">
+                        <td class="p-4 text-gray-600 text-sm">{{ $t->date->format('d/m/Y') }}</td>
+                        <td class="p-4 font-medium text-gray-800">{{ $t->description }}</td>
+                        <td class="p-4">
+                            <span class="px-2 py-1 text-xs font-bold rounded-full {{ $t->type == 'income' ? 'bg-green-100 text-green-700' : ($t->type == 'expense' ? 'bg-red-100 text-red-700' : 'bg-gray-200 text-gray-700') }}">
+                                {{ $t->category_name }}
+                            </span>
+                        </td>
+                        <td class="p-4 text-right font-mono font-medium {{ $t->type == 'income' ? 'text-green-600' : 'text-red-500' }}">
+                            {{ $t->type == 'expense' ? '-' : '+' }} R$ {{ number_format($t->amount, 2, ',', '.') }}
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-gray-400 italic">Nenhum lançamento encontrado para este período.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile Card View -->
+    <div class="md:hidden divide-y divide-gray-100">
+        @forelse($transactions as $t)
+            <div class="p-4 flex flex-col space-y-2 hover:bg-yellow-50 transition duration-150">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-bold text-gray-800">{{ $t->description }}</span>
+                    <span class="font-mono font-bold {{ $t->type == 'income' ? 'text-green-600' : 'text-red-500' }}">
+                        {{ $t->type == 'expense' ? '-' : '+' }} R$ {{ number_format($t->amount, 2, ',', '.') }}
+                    </span>
+                </div>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                    <span>{{ $t->date->format('d/m/Y') }}</span>
+                    <span class="px-2 py-1 text-xs font-bold rounded-full {{ $t->type == 'income' ? 'bg-green-100 text-green-700' : ($t->type == 'expense' ? 'bg-red-100 text-red-700' : 'bg-gray-200 text-gray-700') }}">
+                        {{ $t->category_name }}
+                    </span>
+                </div>
+            </div>
+        @empty
+            <div class="p-8 text-center text-gray-400 italic">Nenhum lançamento encontrado para este período.</div>
+        @endforelse
+    </div>
+
     <div class="p-4 bg-gray-50 border-t border-gray-100">
         {{ $transactions->links() }}
     </div>

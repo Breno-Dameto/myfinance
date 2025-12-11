@@ -7,11 +7,11 @@
         <a href="{{ route('transactions.index') }}" class="text-sm text-gray-500 hover:text-dark">Voltar</a>
     </div>
 
-    <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-primary">
+    <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-primary pb-20 md:pb-8">
         <form action="{{ route('transactions.store') }}" method="POST" x-data="{ 
             categoryMode: 'existing', 
             txnType: 'expense'
-        }">
+        }" class="relative">
             @csrf
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -71,8 +71,9 @@
                 </div>
             </div>
 
-            <div class="flex justify-end pt-4 border-t border-gray-100">
-                <button type="submit" class="bg-dark text-white font-bold py-3 px-8 rounded hover:bg-gray-800 transition transform hover:-translate-y-0.5 shadow-lg">
+            <!-- Botão de Salvar Fixo para Mobile -->
+            <div class="md:relative fixed bottom-0 left-0 right-0 p-4 bg-white border-t md:border-t-0 shadow-lg md:shadow-none z-10">
+                <button type="submit" class="w-full bg-dark text-white font-bold py-3 rounded hover:bg-gray-800 transition shadow-lg">
                     Salvar Lançamento
                 </button>
             </div>
