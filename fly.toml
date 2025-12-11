@@ -22,6 +22,9 @@ primary_region = "iad"
   MAIL_HOST = 'smtp.mailersend.net'
   MAIL_MAILER = 'smtp'
   MAIL_PORT = '587'
+  MAIL_FROM_ADDRESS = "MS_3fHVKt@test-z0vklo6897el7qrx.mlsender.net"
+  MAIL_FROM_NAME = "MyFinance"
+  APP_NAME = "MyFinance"
   QUEUE_CONNECTION = 'sync'
   SESSION_DRIVER = 'cookie'
   # Fix 419 Page Expired & HTTPS
