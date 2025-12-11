@@ -1,0 +1,47 @@
+# fly.toml app configuration file generated for myfinance on 2025-01-01T00:00:00+00:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "myfinance-app"
+primary_region = "gru"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_ENV = "production"
+  APP_DEBUG = "false"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  DB_CONNECTION = "sqlite"
+  DB_DATABASE = "/data/database.sqlite"
+  BROADCAST_CONNECTION = "log"
+  CACHE_STORE = "file"
+  # CACHE_STORE = "array" # Use array if file permission issues persist, or file if persistent
+  # SESSION_DRIVER = "cookie" # Simple for serverless-like, but file/database is better if persistent
+  SESSION_DRIVER = "file"
+  SESSION_PATH = "/data/sessions" # Persist sessions
+  QUEUE_CONNECTION = "sync"
+  MAIL_MAILER = "smtp"
+  MAIL_HOST = "smtp.mailersend.net"
+  MAIL_PORT = "587"
+  MAIL_ENCRYPTION = "tls"
+  # Keys will be set via secrets
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[mounts]
+  source = "myfinance_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb" # PHP needs RAM, but 256 might be tight. 512 is safer if free tier allows.
+  cpus = 1
