@@ -4,6 +4,8 @@ ARG PHP_VERSION=8.2
 ARG NODE_VERSION=18
 
 FROM ubuntu:22.04 as base
+ARG PHP_VERSION=8.2
+ARG NODE_VERSION=18
 LABEL fly_launch_runtime="laravel"
 
 # Install basics
@@ -18,6 +20,7 @@ RUN apt-get update && \
     unzip \
     git \
     supervisor \
+    nginx \
     sqlite3 \
     libcap2-bin \
     libpng-dev \
