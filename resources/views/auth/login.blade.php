@@ -81,7 +81,7 @@
             </form>
 
             <p class="mt-10 text-center text-xs text-gray-500">
-                &copy; {{ date('Y') }} MyFinance. Todos os direitos reservados.
+                &copy; {{ date('Y') }} MyFinance. Breno Dameto. Todos os direitos reservados.
             </p>
         </div>
     </div>

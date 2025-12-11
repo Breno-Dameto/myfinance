@@ -83,8 +83,8 @@
                 </div>
             </form>
 
-            <p class="mt-6 text-center text-sm text-gray-500">
-                Não recebeu? <a href="{{ route('login') }}" class="font-semibold text-primaryDark hover:text-yellow-600">Tentar novamente</a>
+            <p class="mt-6 text-center text-xs text-gray-500">
+                &copy; {{ date('Y') }} MyFinance. Breno Dameto. Todos os direitos reservados.
             </p>
         </div>
     </div>
