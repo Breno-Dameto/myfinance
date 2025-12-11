@@ -25,6 +25,10 @@ primary_region = "iad"
   QUEUE_CONNECTION = 'sync'
   SESSION_DRIVER = 'file'
   SESSION_PATH = '/data/sessions'
+  # Fix 419 Page Expired & HTTPS
+  SESSION_SECURE_COOKIE = "true"
+  IS_HTTPS = "true"
+  ASSET_URL = "https://myfinance-app.fly.dev"
 
 [[mounts]]
   source = 'myfinance_data'
