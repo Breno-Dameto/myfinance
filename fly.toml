@@ -23,8 +23,7 @@ primary_region = "iad"
   MAIL_MAILER = 'smtp'
   MAIL_PORT = '587'
   QUEUE_CONNECTION = 'sync'
-  SESSION_DRIVER = 'file'
-  SESSION_PATH = '/data/sessions'
+  SESSION_DRIVER = 'cookie'
   # Fix 419 Page Expired & HTTPS
   SESSION_SECURE_COOKIE = "true"
   IS_HTTPS = "true"
