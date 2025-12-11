@@ -61,6 +61,12 @@ COPY .fly/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY .fly/nginx.conf /etc/nginx/sites-available/default
 COPY .fly/php-fpm.conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 
+# Fix Windows line endings (CRLF) -> Linux (LF)
+RUN sed -i 's/\r$//' /entrypoint \
+    && sed -i 's/\r$//' /etc/supervisor/conf.d/supervisord.conf \
+    && sed -i 's/\r$//' /etc/nginx/sites-available/default \
+    && sed -i 's/\r$//' /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
+
 RUN chmod +x /entrypoint
 
 # Setup Application
