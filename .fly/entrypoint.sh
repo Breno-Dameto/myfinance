@@ -16,6 +16,12 @@ if [ -d "/data" ]; then
         touch /data/database.sqlite
     fi
     
+    # Create sessions directory to avoid 419 errors
+    if [ ! -d "/data/sessions" ]; then
+        echo "Creating /data/sessions..."
+        mkdir -p /data/sessions
+    fi
+
     # Ensure permissions are correct for the www-data user
     echo "Setting permissions for /data..."
     chown -R www-data:www-data /data
