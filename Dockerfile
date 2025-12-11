@@ -65,7 +65,8 @@ COPY .fly/php-fpm.conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 RUN sed -i 's/\r$//' /entrypoint \
     && sed -i 's/\r$//' /etc/supervisor/conf.d/supervisord.conf \
     && sed -i 's/\r$//' /etc/nginx/sites-available/default \
-    && sed -i 's/\r$//' /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
+    && sed -i 's/\r$//' /etc/php/${PHP_VERSION}/fpm/php-fpm.conf \
+    && ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 RUN chmod +x /entrypoint
 
