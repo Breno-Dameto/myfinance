@@ -32,13 +32,13 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 text-gray-800 flex h-screen overflow-hidden">
+<body class="bg-gray-100 text-gray-800 flex flex-col md:flex-row h-screen overflow-hidden">
 
     @auth
     <!-- Mobile Sidebar Backdrop & Menu -->
-    <div x-data="{ open: false }" class="md:hidden">
+    <div x-data="{ open: false }" class="md:hidden w-full flex-shrink-0">
         <!-- Mobile Header (Updated with Menu Button) -->
-        <header class="bg-dark text-white p-4 flex justify-between items-center z-30 relative shadow-md">
+        <header class="bg-dark text-white p-4 flex justify-between items-center z-30 relative shadow-md w-full">
             <div class="flex items-center">
                 <button @click="open = !open" class="text-white focus:outline-none mr-4">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -46,7 +46,7 @@
                 <span class="font-bold text-primary text-xl tracking-wider">MY<span class="text-white">FINANCE</span></span>
             </div>
             <!-- Profile/Logout Mini -->
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                 @csrf
                 <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg></button>
             </form>
