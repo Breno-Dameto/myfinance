@@ -35,7 +35,44 @@
 <body class="bg-gray-100 text-gray-800 flex h-screen overflow-hidden">
 
     @auth
-    <!-- Sidebar -->
+    <!-- Mobile Sidebar Backdrop & Menu -->
+    <div x-data="{ open: false }" class="md:hidden">
+        <!-- Mobile Header (Updated with Menu Button) -->
+        <header class="bg-dark text-white p-4 flex justify-between items-center z-30 relative shadow-md">
+            <div class="flex items-center">
+                <button @click="open = !open" class="text-white focus:outline-none mr-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <span class="font-bold text-primary text-xl tracking-wider">MY<span class="text-white">FINANCE</span></span>
+            </div>
+            <!-- Profile/Logout Mini -->
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg></button>
+            </form>
+        </header>
+
+        <!-- Slide-over Menu -->
+        <div x-show="open" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="-translate-x-full opacity-0"
+             x-transition:enter-end="translate-x-0 opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="translate-x-0 opacity-100"
+             x-transition:leave-end="-translate-x-full opacity-0"
+             class="fixed inset-0 z-40 bg-dark/95 backdrop-blur-sm pt-20 px-6"
+             style="display: none;"> <!-- Setup for x-show -->
+            
+            <nav class="space-y-6">
+                <a href="{{ route('dashboard') }}" class="block text-xl font-medium text-white hover:text-primary border-b border-gray-800 pb-2">Dashboard BI</a>
+                <a href="{{ route('transactions.index') }}" class="block text-xl font-medium text-white hover:text-primary border-b border-gray-800 pb-2">Lançamentos</a>
+                <a href="{{ route('transactions.create') }}" class="block text-xl font-medium text-white hover:text-primary border-b border-gray-800 pb-2">Novo Lançamento</a>
+                <button @click="open = false" class="mt-8 w-full py-3 bg-gray-800 text-gray-400 rounded-lg">Fechar Menu</button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
     <aside class="w-64 bg-dark text-white flex flex-col shadow-2xl z-20 hidden md:flex">
         <div class="h-16 flex items-center justify-center border-b border-gray-800">
             <h1 class="text-2xl font-bold tracking-wider text-primary">MY<span class="text-white">FINANCE</span></h1>
@@ -72,14 +109,7 @@
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- Mobile Header -->
-        <header class="md:hidden bg-dark text-white p-4 flex justify-between items-center">
-            <span class="font-bold text-primary">MYFINANCE</span>
-            @auth
-            <a href="{{ route('dashboard') }}" class="text-sm">Home</a>
-            @endauth
-        </header>
-
+        
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
             @if(session('success'))
                 <div x-data="{ show: true }" x-show="show" class="mb-6 bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm flex justify-between items-center">

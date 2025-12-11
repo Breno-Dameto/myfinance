@@ -8,11 +8,13 @@
     </div>
     
     <!-- Filtro de Data -->
-    <form method="GET" class="bg-white p-2 rounded shadow-sm flex items-center space-x-2">
-        <input type="date" name="start_date" value="{{ $startDate }}" class="border-gray-300 border rounded px-2 py-1 text-sm focus:border-primary focus:ring-primary">
-        <span class="text-gray-400">-</span>
-        <input type="date" name="end_date" value="{{ $endDate }}" class="border-gray-300 border rounded px-2 py-1 text-sm focus:border-primary focus:ring-primary">
-        <button type="submit" class="bg-dark text-white px-4 py-1 rounded text-sm hover:bg-gray-800 transition">Filtrar</button>
+    <form method="GET" class="w-full md:w-auto bg-white p-3 rounded shadow-sm flex flex-col md:flex-row items-center gap-2">
+        <div class="flex items-center w-full md:w-auto gap-2">
+            <input type="date" name="start_date" value="{{ $startDate }}" class="flex-1 border-gray-300 border rounded px-2 py-2 text-sm focus:border-primary focus:ring-primary">
+            <span class="text-gray-400 hidden md:inline">-</span>
+            <input type="date" name="end_date" value="{{ $endDate }}" class="flex-1 border-gray-300 border rounded px-2 py-2 text-sm focus:border-primary focus:ring-primary">
+        </div>
+        <button type="submit" class="w-full md:w-auto bg-dark text-white px-6 py-2 rounded text-sm hover:bg-gray-800 transition font-bold">Filtrar</button>
     </form>
 </div>
 
