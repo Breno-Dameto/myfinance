@@ -3,11 +3,11 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'myfinance-app'
-primary_region = 'gru'
+app = "myfinance-app"
+primary_region = "iad"
 
 [build]
-  dockerfile = 'Dockerfile'
+  dockerfile = "Dockerfile"
 
 [env]
   APP_DEBUG = 'false'
