@@ -32,7 +32,7 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 text-gray-800 flex flex-col md:flex-row h-screen overflow-hidden">
+<body class="bg-gray-100 text-gray-800 flex flex-col md:flex-row h-screen">
 
     @auth
     <!-- Mobile Sidebar Backdrop & Menu -->
@@ -108,7 +108,7 @@
     @endauth
 
     <!-- Main Content Wrapper -->
-    <div class="flex-1 flex flex-col h-screen overflow-hidden md:ml-64 transition-all duration-300">
+    <div class="flex-1 flex flex-col md:ml-64 transition-all duration-300">
         
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-8">
             @if(session('success'))
